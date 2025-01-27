@@ -3,24 +3,33 @@ import './App.css';
 import { use, useState } from 'react';
 
 function App() {
-  const [leapYear,setLeapYear]=useState("");
+  const [species,setSpecies]=useState("");
+  const [age,setAge]=useState("");
   const [check,setCheck]=useState("");
-  const leapYearChecker=()=>{
-    if((leapYear%4===0 && leapYear%100!==0) ||leapYear%400===0 ){
-      setCheck("leapyear")
-    }else{
-      setCheck("Not leapyear")
-    }
+ const petFoodRecommendationChecker=()=>{
+  if(age<=2){
+    setCheck("Puppy food");
+  }else if(age>5){
+    setCheck("Senior Cat Food");
   }
-  const year=(event)=>{
-    setLeapYear(event.target.value);
-  }
+ }
+ const food=(event)=>{
+  setSpecies(event.target.value);
+ }
+ const petFood=(event)=>{
+  setAge(event.target.value);
+ }
   return (
     <div>
-      <h1>Leap Year Checker</h1>
-      <input type="number" value={leapYear} onChange={year}/>
-      <button onClick={leapYearChecker}>Check</button>
-      <p>{check}</p>
+      <h1>Pet Food Recommendation</h1>
+      <select value={species} onChange={food}>
+        <option value={""}>select</option>
+        <option value={"dog"}>Dog</option>
+        <option value={"cat"}>Cat</option>
+      </select>
+      <input type="number" value={age} onChange={petFood}/>
+      <button onClick={petFoodRecommendationChecker}>Check</button>
+      <p>{check}</p>  
     </div>
   );
 }
