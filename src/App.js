@@ -3,37 +3,26 @@ import './App.css';
 import { use, useState } from 'react';
 
 function App() {
-  const [size, setSize] = useState("");
-  const [extraShot, setExtrashot] = useState("");
-  const [check, setCheck] = useState("");
-  const coffeeCustomization = () => {
-    if(size==="small" && extraShot==="order"){
-      setCheck("small with an option for extra shot espresso");
-    } else if(size==="medium" && extraShot==="order"){
-      setCheck("medium with an option for extra shot espresso");
-    } else if(size==="large" && extraShot==="order"){
-      setCheck("large with an option for extra shot espresso");
+  const [password,setPassword]=useState("");
+  const [check,setCheck]=useState("");
+  const passwordChecker=()=>{
+    if(password.length<6){
+      setCheck("Weak");
+    }else if(password.length>=6 && password.length<=10){
+      setCheck("Medium");
+    }else {
+      setCheck("Strong");
     }
   }
-  const customerOrder=(event)=>{
-    setSize(event.target.value);
-  }
-
-  const order = (event) => {
-    setExtrashot(event.target.value);
+  const Strength=(event)=>{
+    setPassword(event.target.value);
   }
   return (
     <div>
-      <h1>Coffee Customization</h1>
-      <select value={size} onChange={customerOrder}>
-        <option value={""}>select</option>
-        <option value={"small"}>Small</option>
-        <option value={"medium"}>Medium</option>
-        <option value={"large"}>Large</option>
-      </select>
-      <input type="text" value={extraShot} onChange={order} />
-      <button onClick={coffeeCustomization}>check</button>
-      <div>{check}</div>
+      <h1>Password Strength Checker</h1>
+      <input type="text"value={password} onChange={Strength}/>
+      <button onClick={passwordChecker}>Check</button>
+      <p>{check}</p>
     </div>
   );
 }
