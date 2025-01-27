@@ -3,25 +3,23 @@ import './App.css';
 import { use, useState } from 'react';
 
 function App() {
-  const [password,setPassword]=useState("");
+  const [leapYear,setLeapYear]=useState("");
   const [check,setCheck]=useState("");
-  const passwordChecker=()=>{
-    if(password.length<6){
-      setCheck("Weak");
-    }else if(password.length>=6 && password.length<=10){
-      setCheck("Medium");
-    }else {
-      setCheck("Strong");
+  const leapYearChecker=()=>{
+    if((leapYear%4===0 && leapYear%100!==0) ||leapYear%400===0 ){
+      setCheck("leapyear")
+    }else{
+      setCheck("Not leapyear")
     }
   }
-  const Strength=(event)=>{
-    setPassword(event.target.value);
+  const year=(event)=>{
+    setLeapYear(event.target.value);
   }
   return (
     <div>
-      <h1>Password Strength Checker</h1>
-      <input type="text"value={password} onChange={Strength}/>
-      <button onClick={passwordChecker}>Check</button>
+      <h1>Leap Year Checker</h1>
+      <input type="number" value={leapYear} onChange={year}/>
+      <button onClick={leapYearChecker}>Check</button>
       <p>{check}</p>
     </div>
   );
